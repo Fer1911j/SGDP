@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:APPGDP0001.ViewModels"
+             x:Class="APPGDP0001.View.ClientesView">
+    <ContentView.BindingContext>
+        <viewModel:ClientesViewModel />
+    </ContentView.BindingContext>
+    <Grid VerticalOptions="Start">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <!-- Para el título de 'Clientes' -->
+            <RowDefinition Height="*" />
+            <!-- Para la CollectionView -->
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <Label 
+            Text="Clientes"
+            VerticalOptions="Center" 
+            HorizontalOptions="Start"
+            FontSize="20"
+            Grid.Column="0"
+            Margin="10,0,0,0" />
+
+        <ImageButton
+            Source="add_user.png" 
+            WidthRequest="30"
+            HeightRequest="30"
+            HorizontalOptions="End"
+            VerticalOptions="Center"
+            BackgroundColor="Transparent"
+            Margin="0,0,10,0"
+            Clicked="OnAddClientClicked" 
+            Grid.Column="1" />
+
+        <CollectionView 
+            ItemsSource="{Binding Clientes}" 
+            Grid.Row="1" 
+            Margin="10,10,10,0">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Margin="0,5" Padding="10" BackgroundColor="LightGray">
+                        <StackLayout>
+                            <Label Text="{Binding Nombre}" FontSize="16"/>
+                            <Label Text="{Binding Direccion}" FontSize="14"/>
+                            <Label Text="{Binding Telefono}" FontSize="14"/>
+                            <Label Text="{Binding Email}" FontSize="14" IsVisible="False"/>
+
+                            <HorizontalStackLayout Margin="0,10,0,0" HorizontalOptions="End">
+                                <ImageButton
+                                    Source="edit_icon.png" 
+                                    WidthRequest="30"
+                                    HeightRequest="30"
+                                    BackgroundColor="Transparent"
+                                    Clicked="OnEditClientClicked"
+                                    CommandParameter="{Binding .}"/>
+                                <!-- Asegúrate de que . se refiera al cliente actual -->
+
+                                <ImageButton
+                                    Source="delete_icon.png" 
+                                    WidthRequest="30"
+                                    HeightRequest="30"
+                                    BackgroundColor="Transparent"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewModel:ClientesViewModel}}, Path=DeleteClientCommand}"
+                                    CommandParameter="{Binding .}" />
+                            </HorizontalStackLayout>
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Grid x:Name="EditClientOverlay" BackgroundColor="white" IsVisible="False" Grid.Row="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="36     ,0,0,0">
+            <StackLayout BackgroundColor="White" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Padding="20">
+                <Label Text="Editar Cliente" FontSize="20" HorizontalOptions="Center" />
+                <Entry x:Name="NameEntry" Placeholder="Nombre" />
+                <Entry x:Name="AddressEntry" Placeholder="Dirección" />
+                <Entry x:Name="PhoneEntry" Placeholder="Teléfono" />
+                <Entry x:Name="EmailEntry" Placeholder="Gmail" />
+
+                <!-- Usar un HorizontalStackLayout para los botones -->
+                <HorizontalStackLayout HorizontalOptions="FillAndExpand" Margin="0,20,0,0" Spacing="10" >
+                    <Button Text="Guardar" Clicked="OnSaveClicked" HorizontalOptions="FillAndExpand" />
+                    <Button Text="Cancelar" Clicked="OnCancelClicked" HorizontalOptions="FillAndExpand" />
+                </HorizontalStackLayout>
+            </StackLayout>
+        </Grid>
+
+    </Grid>
+</ContentView>
+

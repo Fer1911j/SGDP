@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:APPGDP0001.View"
+             x:Class="APPGDP0001.AppShell">
+
+
+    <ShellContent Route="login" ContentTemplate="{DataTemplate local:LoginPage}" />
+    <ShellContent Route="admin" ContentTemplate="{DataTemplate local:AdminPage}" />
+    <ShellContent Route="user" ContentTemplate="{DataTemplate local:UserPage}" />
+    <ShellContent Route="clientesAgregar" ContentTemplate="{DataTemplate local:ClientesAgregarPage}" />
+    <ShellContent Route="clientesEditar" ContentTemplate="{DataTemplate local:ClientesEditPage}" />
+    
+</Shell>

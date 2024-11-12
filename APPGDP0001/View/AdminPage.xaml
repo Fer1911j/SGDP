@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+    <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Padding="0"
+             NavigationPage.HasBackButton="False"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:vm="clr-namespace:APPGDP0001.ViewModels"
+             x:Class="APPGDP0001.View.AdminPage"
+             x:DataType="vm:AdminViewModel">
+
+    <ContentPage.BindingContext>
+        <vm:AdminViewModel/>
+    </ContentPage.BindingContext>
+
+    <Grid Margin="0">
+        <!-- Definir las filas del Grid -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Barra superior con botón de configuración a la izquierda y logo a la derecha -->
+        <StackLayout Grid.Row="0" Orientation="Horizontal" Padding="15" BackgroundColor="#3A5FCD" VerticalOptions="Start">
+            <!-- Botón de Configuración -->
+            <ImageButton Source="configuracion.png" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="40" HeightRequest="40" Command="{Binding ToggleSettingsCommand}"/>
+
+            <!-- Nombre de la aplicación en el centro -->
+            <Label Text="Gestión de Instalaciones" FontSize="Medium" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" TextColor="White" />
+
+            <!-- Logo a la derecha -->
+            <Image Source="logo.png" WidthRequest="80" HeightRequest="60" VerticalOptions="Center" HorizontalOptions="End" Margin="5,0,0,0"/>
+        </StackLayout>
+
+        <!-- Contenedor de vista principal -->
+        <ContentView Grid.Row="1" Content="{Binding CurrentView}" />
+
+        <!-- Frame de fondo que cierra la barra lateral al hacer clic -->
+        <Frame Grid.RowSpan="3" IsVisible="{Binding IsSettingsVisible}" BackgroundColor="Transparent">
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding ToggleSettingsCommand}" />
+            </Frame.GestureRecognizers>
+        </Frame>
+
+        <!-- Barra lateral de configuración en el lado izquierdo con botón de cierre a la derecha -->
+        <Frame IsVisible="{Binding IsSettingsVisible}" Grid.RowSpan="3" HorizontalOptions="Start" WidthRequest="250" BackgroundColor="White" CornerRadius="10" HasShadow="True" Margin="0">
+            <StackLayout Padding="10" Spacing="15">
+                <!-- Botón de cerrar a la derecha -->
+                <ImageButton Source="close.png" WidthRequest="15" HeightRequest="15" HorizontalOptions="End" Command="{Binding ToggleSettingsCommand}" />
+
+                <!-- Panel de Usuario -->
+                <Label Text="{Binding NombreUsuario}" FontAttributes="Bold" />
+                <Label Text="{Binding Rol}" />
+
+                <!-- Botón de Administración con submenú -->
+                <Button Text="Admin" Command="{Binding ToggleAdminSubmenuCommand}" BackgroundColor="#1E90FF" />
+                <StackLayout IsVisible="{Binding IsAdminSubmenuVisible}" Padding="10, 0, 0, 0" Spacing="5">
+                    <Button Text="Usuarios"  BackgroundColor="#D3D3D3" />
+                    <Button Text="Técnicos"  BackgroundColor="#D3D3D3" />
+                    <Button Text="Equipos" BackgroundColor="#D3D3D3" />
+                    <Button Text="Notificaciones"  BackgroundColor="#D3D3D3" />
+                </StackLayout>
+
+                <!-- Botón de Inventario con submenú -->
+                <Button Text="Inventario" Command="{Binding ToggleInventorySubmenuCommand}" BackgroundColor="#1E90FF" />
+                <StackLayout IsVisible="{Binding IsInventorySubmenuVisible}" Padding="10, 0, 0, 0" Spacing="5">
+                    <Button Text="Materiales"  BackgroundColor="#D3D3D3"  />
+                    <Button Text="Mantenimiento"  BackgroundColor="#D3D3D3"  />
+                    <Button Text="Tareas"  BackgroundColor="#D3D3D3"  />
+                </StackLayout>
+
+                <!-- Botón de Gestión Documental con submenú -->
+                <Button Text="Docs" Command="{Binding ToggleDocumentsSubmenuCommand}" BackgroundColor="#1E90FF" />
+                <StackLayout IsVisible="{Binding IsDocumentsSubmenuVisible}" Padding="10, 0, 0, 0" Spacing="5">
+                    <Button Text="Ver Documentos"  BackgroundColor="#D3D3D3" />
+                </StackLayout>
+
+                <!-- Botón de Configuración con submenú -->
+                <Button Text="Config." Command="{Binding ToggleSettingsSubmenuCommand}" BackgroundColor="#1E90FF" />
+                <StackLayout IsVisible="{Binding IsSettingsSubmenuVisible}" Padding="10, 0, 0, 0" Spacing="5">
+                    <Button Text="Ajustes"  BackgroundColor="#D3D3D3" />
+                    <Button Text="Ayuda"  BackgroundColor="#D3D3D3" />
+                    <Button Text="Cerrar Sesión"  BackgroundColor="Red" TextColor="White" Command="{Binding LogoutCommand}" />
+                </StackLayout>
+            </StackLayout>
+        </Frame>
+
+        <!-- Barra inferior con botones -->
+        <StackLayout Grid.Row="2" Orientation="Horizontal" HorizontalOptions="Center" BackgroundColor="#3A5FCD" HeightRequest="70" Padding="10,0">
+            <ImageButton Source="cliente.png" HorizontalOptions="FillAndExpand" Command="{Binding ShowClientesCommand}" />
+            <ImageButton Source="proyectos.png" HorizontalOptions="FillAndExpand" Command="{Binding ShowProyectosCommand}" />
+            <ImageButton Source="instalacion.png" HorizontalOptions="FillAndExpand" Command="{Binding ShowInstalacionesCommand}" />
+            <ImageButton Source="reportes.png" HorizontalOptions="FillAndExpand" Command="{Binding ShowReportesCommand}" />
+        </StackLayout>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="APPGDP0001.View.AddUserPage"
+             Title="Añadir Usuario">
+
+    <StackLayout Padding="20">
+        <Label Text="Nombre de Usuario" />
+        <Entry Text="{Binding NombreUsuario}" />
+
+        <Label Text="Email" />
+        <Entry Text="{Binding Email}" Keyboard="Email" />
+
+        <Label Text="Contraseña" />
+        <Entry Text="{Binding Contrasena}" IsPassword="True" />
+
+        <Label Text="Rol" />
+        <Picker SelectedItem="{Binding Rol}">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>admin</x:String>
+                    <x:String>usuario</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+
+        <Button Text="Añadir Usuario" Command="{Binding AddUserCommand}" />
+    </StackLayout>
+</ContentPage>
