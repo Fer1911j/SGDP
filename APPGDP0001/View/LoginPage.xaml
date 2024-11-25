@@ -21,19 +21,22 @@
 		
 		<Entry x:Name="entry"
             Placeholder="Usuario"
-           Text="{Binding Username}"/>
+           Text="{Binding Username}"
+           FontSize="17"/>
 		
 		 <Entry IsPassword="true"
             
             Placeholder="Contraseña"
-           Text="{Binding Password}" />
+           Text="{Binding Password}" 
+            FontSize="17"/>
 		
         <Button
             Margin="0,50,0,0"
             BackgroundColor="DarkBlue"
             Command="{Binding LoginCommand}"
-             Text="Iniciar sesiòn"
-            HorizontalOptions="Center" />
+             Text="Iniciar sesión"
+            HorizontalOptions="Center"
+            FontSize="17"/>
 
     </StackLayout>
 

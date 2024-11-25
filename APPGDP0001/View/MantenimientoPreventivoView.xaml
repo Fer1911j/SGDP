@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                                               xmlns:viewModel="clr-namespace:APPGDP0001.ViewModels"
-         x:Class="APPGDP0001.View.InstalacionesView">
+                      xmlns:viewModel="clr-namespace:APPGDP0001.ViewModels"
+         x:Class="APPGDP0001.View.MantenimientoPreventivoView">
     <ContentView.BindingContext>
-        <viewModel:InstalacionesViewModel/>
+        <viewModel:MantenimientoViewModel/>
     </ContentView.BindingContext>
 
     <Grid VerticalOptions="Start">
@@ -13,10 +13,10 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <SearchBar Margin=" -10,25,0,0"
-    Placeholder="Buscar Instalación..." 
-      />
+    Placeholder="Buscar Mantenimiento..." 
+      Text="{Binding SearchText}"/>
 
-        <Label Text="Instalaciones" FontSize="20" Grid.Row="0" Margin="10,0" />
+        <Label Text="Mantenimiento - Preventivo" FontSize="20" Grid.Row="0" Margin="10,0" />
 
         <ImageButton
 Source="add_user.png"
@@ -28,16 +28,15 @@ BackgroundColor="Transparent"
 Margin="0,0,10,0"
         />
 
-        <CollectionView ItemsSource="{Binding Instalacion}" Grid.Row="1" Margin="10,10,10,0">
+        <CollectionView ItemsSource="{Binding Mantenimientos}" Grid.Row="1" Margin="10,10,10,0">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Frame Margin="0,5" Padding="10" BackgroundColor="LightGray">
                         <StackLayout>
-                            <Label Text="{Binding Id_proyecto}" FontSize="16"/>
-                            <Label Text="{Binding Ubicacion}" FontSize="14"/>
-                            <Label Text="{Binding Fecha_inicio}" FontSize="14"/>
-                            <Label Text="{Binding Fecha_fin}" FontSize="14" />
-                            <Label Text="{Binding EstadoInstalacion}" FontSize="14" />
+                            <Label Text="{Binding Id_proyecto}"  FontSize="16"/>
+                            <Label Text="{Binding Id_tecnico}" FontSize="14"/>
+                            <Label Text="{Binding FechaProgramada}" FontSize="14"/>
+                            <Label Text="{Binding EstadoMantenimiento}" FontSize="14" />
 
                             <HorizontalStackLayout Margin="0,10,0,0" HorizontalOptions="End">
                                 <ImageButton

@@ -48,27 +48,50 @@ namespace APPGDP0001.ViewModels
         }
         private async void OnLogin()
         {
+            // Validar las credenciales del usuario
             var isValidUser = await _databaseService.ValidateUser(Username, Password);
 
             if (isValidUser)
             {
+                // Obtener el rol del usuario
                 var userRole = await _databaseService.GetUserRole(Username, Password);
 
                 if (userRole != null)
                 {
-                    var adminViewModel = new AdminViewModel(Username, userRole);
-                    Application.Current.MainPage = new NavigationPage(new View.AdminPage { BindingContext = adminViewModel });
+                    // Verificar si el rol es "admin"
+                    if (userRole.Equals("admin", StringComparison.OrdinalIgnoreCase))
+                    {
+                        // Crear una instancia del AdminViewModel con el nombre de usuario y el rol
+                        var adminViewModel = new AdminViewModel(Username, userRole);
+
+                        // Asignar la AdminPage con el AdminViewModel como BindingContext
+                        Application.Current.MainPage = new NavigationPage(new View.AdminPage { BindingContext = adminViewModel });
+                    }
+                    else if (userRole.Equals("usuario", StringComparison.OrdinalIgnoreCase))
+                    {
+                        // Crear la UserPage para el usuario regular
+                        Application.Current.MainPage = new NavigationPage(new View.UserPage());
+                    }
+                    else
+                    {
+                        // En caso de que el rol no sea ni "admin" ni "usuario"
+                        await Application.Current.MainPage.DisplayAlert("Error", "Rol desconocido", "OK");
+                    }
                 }
                 else
                 {
+                    // Manejar el error si no se puede obtener el rol del usuario
                     await Application.Current.MainPage.DisplayAlert("Error", "No se pudo obtener el rol del usuario", "OK");
                 }
             }
             else
             {
+                // Mostrar un mensaje de error si la validación de usuario falla
                 await Application.Current.MainPage.DisplayAlert("Error", "Usuario o contraseña incorrecta", "OK");
             }
         }
+
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string propertyName)

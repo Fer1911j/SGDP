@@ -1,4 +1,5 @@
 using APPGDP0001.Models;
+using APPGDP0001.ViewModels;
 namespace APPGDP0001.View
 {
 
@@ -22,27 +23,31 @@ namespace APPGDP0001.View
 
             if (clienteSeleccionado == null)
             {
-                // Manejar el caso cuando no hay cliente seleccionado
-                return; // Salir del método
+                // Manejar el caso en que no hay cliente seleccionado
+                return; // Salir del método.
             }
 
-            // Verificar que los campos están inicializados
-            if (NameEntry != null && AddressEntry != null && PhoneEntry != null && EmailEntry != null)
+            // Asignar el cliente seleccionado a la propiedad ClienteEditado en el ViewModel
+            if (BindingContext is ClientesViewModel viewModel)
             {
-                NameEntry.Text = clienteSeleccionado.Nombre;
-                AddressEntry.Text = clienteSeleccionado.Direccion;
-                PhoneEntry.Text = clienteSeleccionado.Telefono;
-                EmailEntry.Text = clienteSeleccionado.Email; // Rellenar el campo de email
+                viewModel.ClienteEditado = clienteSeleccionado; // Esto debería funcionar si es correcto
             }
 
-            // Mostrar el StackLayout de edición
+            // Mostrar el overlay de edición
             EditClientOverlay.IsVisible = true;
         }
-        private void OnSaveClicked(object sender, EventArgs e)
+        private async void OnSaveClicked(object sender, EventArgs e)
         {
-            // Lógica para guardar los cambios del cliente
-            // Aquí tendrías que implementar la lógica necesaria para actualizar el cliente.
-            // Luego oculta el StackLayout
+            if (!EditClientOverlay.IsVisible)
+                return;
+
+            // Verificar que el ClienteEditado no sea nulo
+            if (BindingContext is ClientesViewModel viewModel && viewModel.ClienteEditado != null)
+            {
+                await viewModel.EditarClienteCommand.ExecuteAsync(viewModel.ClienteEditado);
+            }
+
+            // Ocultar el overlay de edición
             EditClientOverlay.IsVisible = false;
         }
 
@@ -51,8 +56,6 @@ namespace APPGDP0001.View
             // Oculta el StackLayout sin guardar cambios
             EditClientOverlay.IsVisible = false;
         }
-
-
 
     }
 

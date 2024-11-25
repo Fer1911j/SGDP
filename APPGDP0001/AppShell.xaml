@@ -9,6 +9,6 @@
     <ShellContent Route="admin" ContentTemplate="{DataTemplate local:AdminPage}" />
     <ShellContent Route="user" ContentTemplate="{DataTemplate local:UserPage}" />
     <ShellContent Route="clientesAgregar" ContentTemplate="{DataTemplate local:ClientesAgregarPage}" />
-    <ShellContent Route="clientesEditar" ContentTemplate="{DataTemplate local:ClientesEditPage}" />
+    
     
 </Shell>

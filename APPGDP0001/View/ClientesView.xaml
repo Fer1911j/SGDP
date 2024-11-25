@@ -6,42 +6,29 @@
     <ContentView.BindingContext>
         <viewModel:ClientesViewModel />
     </ContentView.BindingContext>
+
     <Grid VerticalOptions="Start">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <!-- Para el título de 'Clientes' -->
             <RowDefinition Height="*" />
-            <!-- Para la CollectionView -->
         </Grid.RowDefinitions>
+        <SearchBar Margin="-10,25,0,0"
+    Placeholder="Buscar cliente..." 
+    Text="{Binding SearchText}"  />
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
-
-        <Label 
-            Text="Clientes"
-            VerticalOptions="Center" 
-            HorizontalOptions="Start"
-            FontSize="20"
-            Grid.Column="0"
-            Margin="10,0,0,0" />
+        <Label Text="Clientes" FontSize="20" Grid.Row="0" Margin="10,0" />
 
         <ImageButton
-            Source="add_user.png" 
+            Source="add_user.png"
             WidthRequest="30"
             HeightRequest="30"
             HorizontalOptions="End"
             VerticalOptions="Center"
             BackgroundColor="Transparent"
             Margin="0,0,10,0"
-            Clicked="OnAddClientClicked" 
-            Grid.Column="1" />
+            Clicked="OnAddClientClicked" />
 
-        <CollectionView 
-            ItemsSource="{Binding Clientes}" 
-            Grid.Row="1" 
-            Margin="10,10,10,0">
+        <CollectionView ItemsSource="{Binding Clientes}" Grid.Row="1" Margin="10,10,10,0">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Frame Margin="0,5" Padding="10" BackgroundColor="LightGray">
@@ -53,17 +40,15 @@
 
                             <HorizontalStackLayout Margin="0,10,0,0" HorizontalOptions="End">
                                 <ImageButton
-                                    Source="edit_icon.png" 
+                                    Source="edit_icon.png"
                                     WidthRequest="30"
                                     HeightRequest="30"
                                     BackgroundColor="Transparent"
                                     Clicked="OnEditClientClicked"
                                     CommandParameter="{Binding .}"/>
-                                <!-- Asegúrate de que . se refiera al cliente actual -->
-
                                 <ImageButton
-                                    Source="delete_icon.png" 
-                                    WidthRequest="30"
+                                    Source="delete_icon.png"
+                                                                        WidthRequest="30"
                                     HeightRequest="30"
                                     BackgroundColor="Transparent"
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type viewModel:ClientesViewModel}}, Path=DeleteClientCommand}"
@@ -75,15 +60,14 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <Grid x:Name="EditClientOverlay" BackgroundColor="white" IsVisible="False" Grid.Row="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="36     ,0,0,0">
+        <Grid x:Name="EditClientOverlay" BackgroundColor="White" IsVisible="False" Grid.Row="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="36, -240,20, 0">
             <StackLayout BackgroundColor="White" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Padding="20">
                 <Label Text="Editar Cliente" FontSize="20" HorizontalOptions="Center" />
-                <Entry x:Name="NameEntry" Placeholder="Nombre" />
-                <Entry x:Name="AddressEntry" Placeholder="Dirección" />
-                <Entry x:Name="PhoneEntry" Placeholder="Teléfono" />
-                <Entry x:Name="EmailEntry" Placeholder="Gmail" />
+                <Entry Text="{Binding ClienteEditado.Nombre}" Placeholder="Nombre" />
+                <Entry Text="{Binding ClienteEditado.Direccion}" Placeholder="Dirección" />
+                <Entry Text="{Binding ClienteEditado.Telefono}" Placeholder="Teléfono" />
+                <Entry Text="{Binding ClienteEditado.Email}" Placeholder="Email" />
 
-                <!-- Usar un HorizontalStackLayout para los botones -->
                 <HorizontalStackLayout HorizontalOptions="FillAndExpand" Margin="0,20,0,0" Spacing="10" >
                     <Button Text="Guardar" Clicked="OnSaveClicked" HorizontalOptions="FillAndExpand" />
                     <Button Text="Cancelar" Clicked="OnCancelClicked" HorizontalOptions="FillAndExpand" />
@@ -93,4 +77,7 @@
 
     </Grid>
 </ContentView>
+
+                                   
+
 

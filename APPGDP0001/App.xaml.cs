@@ -1,4 +1,6 @@
-﻿namespace APPGDP0001
+﻿using APPGDP0001.View;
+
+namespace APPGDP0001
 {
     public partial class App : Application
     {
@@ -6,7 +8,7 @@
         {
             InitializeComponent();
             
-            MainPage = new AppShell();
+            MainPage = new LoginPage();
         }
     }
 }

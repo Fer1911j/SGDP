@@ -1,13 +1,67 @@
 ﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-			 xmlns:local="clr-namespace:APPGDP0001.ViewModels"
-             x:Class="APPGDP0001.View.UserPage">
+             Padding="0"
+             NavigationPage.HasBackButton="False"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:vm="clr-namespace:APPGDP0001.ViewModels"
+             x:Class="APPGDP0001.View.UserPage"
+             x:DataType="vm:UserViewModel">
 
-	<StackLayout>
-		<Label Text="Bienvenido, Usuario!"
-               VerticalOptions="CenterAndExpand"
-               HorizontalOptions="CenterAndExpand" />
-		<!-- Agrega más controles específicos para usuarios -->
-	</StackLayout>
+    <ContentPage.BindingContext>
+        <vm:UserViewModel/>
+    </ContentPage.BindingContext>
 
+    <Grid Margin="0">
+        <!-- Definir las filas del Grid -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Barra superior -->
+        <StackLayout Grid.Row="0" Orientation="Horizontal" Padding="15" BackgroundColor="#3A5FCD" VerticalOptions="Start">
+            <ImageButton Source="configuracion.png" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="40" HeightRequest="40" Command="{Binding ToggleSettingsCommand}"/>
+            <Label Text="Panel de Instalador" FontSize="Medium" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" TextColor="White" />
+            <Image Source="logo.png" WidthRequest="80" HeightRequest="60" VerticalOptions="Center" HorizontalOptions="End" Margin="5,0,0,0"/>
+        </StackLayout>
+
+        <!-- Contenedor de vista principal -->
+        <ContentView Grid.Row="1" Content="{Binding CurrentView}" />
+
+        <!-- Frame de fondo que cierra la barra lateral al hacer clic -->
+        <Frame Grid.RowSpan="3" IsVisible="{Binding IsSettingsVisible}" BackgroundColor="Transparent">
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding ToggleSettingsCommand}" />
+            </Frame.GestureRecognizers>
+        </Frame>
+
+        <!-- Barra lateral de opciones -->
+        <Frame IsVisible="{Binding IsSettingsVisible}" Grid.RowSpan="3" HorizontalOptions="Start" WidthRequest="250" BackgroundColor="White" CornerRadius="10" HasShadow="True" Margin="0">
+            <StackLayout Padding="10" Spacing="15">
+                <!-- Botón de cerrar -->
+                <ImageButton Source="close.png" WidthRequest="15" HeightRequest="15" HorizontalOptions="End" Command="{Binding ToggleSettingsCommand}" />
+
+                <!-- Panel de Usuario -->
+                <Label Text="{Binding NombreUsuario}" FontAttributes="Bold" />
+                <Label Text="{Binding Rol}" />
+
+                <!-- Botones de opciones -->
+                <Button Text="Instalaciones"  />
+                <Button Text="Tareas"  />
+                <Button Text="Incidentes"  />
+                <Button Text="Documentación" />
+                <Button Text="Configuración"  />
+                <Button Text="Cerrar Sesión"  BackgroundColor="Red" TextColor="White"/>
+            </StackLayout>
+        </Frame>
+
+        <!-- Barra inferior con botones principales -->
+        <StackLayout Grid.Row="2" Orientation="Horizontal" HorizontalOptions="Center" BackgroundColor="#3A5FCD" HeightRequest="70" Padding="10,0">
+            <ImageButton Source="instalacion.png" HorizontalOptions="FillAndExpand" />
+            <ImageButton Source="tareas.png" HorizontalOptions="FillAndExpand" />
+            <ImageButton Source="reportar.png" HorizontalOptions="FillAndExpand"  />
+            <ImageButton Source="documentos.png" HorizontalOptions="FillAndExpand"  />
+        </StackLayout>
+    </Grid>
 </ContentPage>

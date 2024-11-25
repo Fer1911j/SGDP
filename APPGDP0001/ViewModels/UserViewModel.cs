@@ -1,26 +1,19 @@
-﻿using System.Collections.ObjectModel;
-using System.Threading.Tasks;
-using APPGDP0001.Models;
-using APPGDP0001.Services;
-using APPGDP0001.ViewModels;
-using Microsoft.Maui.Controls;
+﻿using System.ComponentModel;
 using System.Windows.Input;
-using APPGDP0001.View;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System.ComponentModel;
+using MySql.Data.MySqlClient;
+
 namespace APPGDP0001.ViewModels
 {
-    public partial class AdminViewModel : ObservableObject
+    
+    public partial  class UserViewModel : ObservableObject
     {
         private bool isAdminSubmenuVisible;
         private bool isInventorySubmenuVisible;
         private bool isDocumentsSubmenuVisible;
         private bool isSettingsSubmenuVisible;
         private bool _isSettingsVisible;
-
-       
-
         public ICommand LogoutCommand { get; }
 
         private string _nombreUsuario;
@@ -45,19 +38,16 @@ namespace APPGDP0001.ViewModels
                 OnPropertyChanged(nameof(Rol));
             }
         }
-
-        public AdminViewModel(string nombreUsuario, string rol)
+        public UserViewModel(string nombreUsuario, string rol)
         {
             NombreUsuario = nombreUsuario;
             Rol = rol;
-            ShowClientes();
             LogoutCommand = new Command(OnLogout);
         }
 
-
         private void OnLogout()
         {
-            Application.Current.MainPage = new NavigationPage(new LoginPage());
+            Application.Current.MainPage = new NavigationPage(new View.LoginPage());
         }
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
@@ -70,124 +60,17 @@ namespace APPGDP0001.ViewModels
 
         public IRelayCommand ToggleSettingsCommand => new RelayCommand(() => IsSettingsVisible = !IsSettingsVisible);
 
+
+
         [ObservableProperty]
         private ContentView currentView;
 
-        public AdminViewModel()
+        public UserViewModel()
         {
             IsSettingsVisible = false;
-            CurrentView = new View.ClientesView();
+            
 
         }
-        [RelayCommand]
-        public void ShowClientes()
-        {
-            CurrentView = new ClientesView();
-        }
-
-        [RelayCommand]
-        public void ShowProyectos()
-        {
-            CurrentView = new View.ProyectosView();
-            IsSettingsVisible = false;
-        }
-
-        [RelayCommand] 
-        public void ShowInstalaciones()
-        {
-            CurrentView = new InstalacionesView();
-        }
-        [RelayCommand]
-        public void ShowReportes()
-        {
-            CurrentView = new ReporteView();
-        }
-        [RelayCommand]
-        public void ShowEquipos()
-        {
-            CurrentView= new EquiposView();
-
-            IsSettingsVisible = false;
-            IsAdminSubmenuVisible = false;
-        }
-
-        [RelayCommand]
-        public void ShowUsuarios()
-        {
-            CurrentView=new UsuariosView();
-            IsSettingsVisible = false;
-            IsAdminSubmenuVisible = false;  
-        }
-
-        [RelayCommand]
-        public  void ShowNotificaciones()
-        {
-            CurrentView = new NotificacionesView();
-            isAdminSubmenuVisible=false;
-            IsSettingsVisible=false;
-        }
-        [RelayCommand]
-        public void ShowMateriales()
-        {
-            CurrentView = new MaterialesView();
-            IsSettingsVisible = false;
-            IsAdminSubmenuVisible=false;
-        }
-
-        [RelayCommand]
-        public void ShowMantenimiento()
-        {
-            currentView= new MantenimientoPreventivoView();
-            IsSettingsVisible=false;
-            IsAdminSubmenuVisible=false;
-        }
-
-        [RelayCommand]
-        public void ShowTareas()
-        {
-            currentView = new TareasView();
-            IsSettingsVisible=false;
-            isAdminSubmenuVisible=false;
-        }
-
-        [RelayCommand]
-        public void ShowDocumentos()
-        {
-            currentView=new DocumentosView();
-            IsSettingsVisible=false;
-            IsAdminSubmenuVisible=false;
-
-        }
-        [RelayCommand]
-        public void ShowAjustes()
-        {
-            currentView = new AjustesView();
-            IsSettingsVisible=false;
-            isAdminSubmenuVisible=false;
-        }
-
-        [RelayCommand]
-        public void ShowAyuda()
-        {
-            currentView = new AyudaView();
-            IsSettingsVisible=false;
-            IsAdminSubmenuVisible=false;
-        }
-
-        [RelayCommand]
-        public void ShowTecnicos()
-        {
-            currentView=(new TecnicoView());
-            IsSettingsVisible=false;
-            IsAdminSubmenuVisible = false;
-        }
-
-
-
-        
-
-
-
 
         public bool IsAdminSubmenuVisible
         {
@@ -244,12 +127,5 @@ namespace APPGDP0001.ViewModels
             IsInventorySubmenuVisible = false;
             IsDocumentsSubmenuVisible = false;
         });
-
-
-
-
     }
 }
-
-
-

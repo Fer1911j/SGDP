@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                                               xmlns:viewModel="clr-namespace:APPGDP0001.ViewModels"
-         x:Class="APPGDP0001.View.InstalacionesView">
+             xmlns:viewModel="clr-namespace:APPGDP0001.ViewModels"
+             x:Class="APPGDP0001.View.TecnicoView">
     <ContentView.BindingContext>
-        <viewModel:InstalacionesViewModel/>
+        <viewModel:TecnicoViewModel/>
     </ContentView.BindingContext>
 
     <Grid VerticalOptions="Start">
@@ -13,46 +13,45 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <SearchBar Margin=" -10,25,0,0"
-    Placeholder="Buscar Instalación..." 
-      />
+        Placeholder="Buscar Tecnico..." 
+          />
 
-        <Label Text="Instalaciones" FontSize="20" Grid.Row="0" Margin="10,0" />
+        <Label Text="Tecnicos" FontSize="20" Grid.Row="0" Margin="10,0" />
 
         <ImageButton
-Source="add_user.png"
-WidthRequest="30"
-HeightRequest="30"
-HorizontalOptions="End"
-VerticalOptions="Center"
-BackgroundColor="Transparent"
-Margin="0,0,10,0"
-        />
+    Source="add_user.png"
+    WidthRequest="30"
+    HeightRequest="30"
+    HorizontalOptions="End"
+    VerticalOptions="Center"
+    BackgroundColor="Transparent"
+    Margin="0,0,10,0"
+            />
 
-        <CollectionView ItemsSource="{Binding Instalacion}" Grid.Row="1" Margin="10,10,10,0">
+        <CollectionView  Grid.Row="1" Margin="10,10,10,0">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Frame Margin="0,5" Padding="10" BackgroundColor="LightGray">
                         <StackLayout>
-                            <Label Text="{Binding Id_proyecto}" FontSize="16"/>
-                            <Label Text="{Binding Ubicacion}" FontSize="14"/>
-                            <Label Text="{Binding Fecha_inicio}" FontSize="14"/>
-                            <Label Text="{Binding Fecha_fin}" FontSize="14" />
-                            <Label Text="{Binding EstadoInstalacion}" FontSize="14" />
+                            <Label  FontSize="16"/>
+                            <Label  FontSize="14"/>
+                            <Label  FontSize="14"/>
+                            <Label Text="" FontSize="14" />
 
                             <HorizontalStackLayout Margin="0,10,0,0" HorizontalOptions="End">
                                 <ImageButton
-                        Source="edit_icon.png"
-                        WidthRequest="30"
-                        HeightRequest="30"
-                        BackgroundColor="Transparent"
-                        />
+                            Source="edit_icon.png"
+                            WidthRequest="30"
+                            HeightRequest="30"
+                            BackgroundColor="Transparent"
+                            />
                                 <ImageButton
-                        Source="delete_icon.png"
-                        WidthRequest="30"
-                        HeightRequest="30"
-                        BackgroundColor="Transparent"
-                        
-                         />
+                            Source="delete_icon.png"
+                            WidthRequest="30"
+                            HeightRequest="30"
+                            BackgroundColor="Transparent"
+                            
+                             />
                             </HorizontalStackLayout>
                         </StackLayout>
                     </Frame>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-    <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              Padding="0"
              NavigationPage.HasBackButton="False"
@@ -55,31 +55,31 @@
                 <!-- Botón de Administración con submenú -->
                 <Button Text="Admin" Command="{Binding ToggleAdminSubmenuCommand}" BackgroundColor="#1E90FF" />
                 <StackLayout IsVisible="{Binding IsAdminSubmenuVisible}" Padding="10, 0, 0, 0" Spacing="5">
-                    <Button Text="Usuarios"  BackgroundColor="#D3D3D3" />
-                    <Button Text="Técnicos"  BackgroundColor="#D3D3D3" />
-                    <Button Text="Equipos" BackgroundColor="#D3D3D3" />
-                    <Button Text="Notificaciones"  BackgroundColor="#D3D3D3" />
+                    <Button Text="Usuarios"  BackgroundColor="#D3D3D3" Command="{Binding ShowUsuariosCommand}"/>
+                    <Button Text="Técnicos"  BackgroundColor="#D3D3D3" Command="{Binding ShowTecnicosCommand}" />
+                    <Button Text="Equipos" BackgroundColor="#D3D3D3" Command="{Binding ShowEquiposCommand}"/>
+                    <Button Text="Notificaciones"  BackgroundColor="#D3D3D3" Command="{Binding ShowNotificacionesCommand}"/>
                 </StackLayout>
 
                 <!-- Botón de Inventario con submenú -->
                 <Button Text="Inventario" Command="{Binding ToggleInventorySubmenuCommand}" BackgroundColor="#1E90FF" />
                 <StackLayout IsVisible="{Binding IsInventorySubmenuVisible}" Padding="10, 0, 0, 0" Spacing="5">
-                    <Button Text="Materiales"  BackgroundColor="#D3D3D3"  />
-                    <Button Text="Mantenimiento"  BackgroundColor="#D3D3D3"  />
-                    <Button Text="Tareas"  BackgroundColor="#D3D3D3"  />
+                    <Button Text="Materiales"  BackgroundColor="#D3D3D3"  Command="{Binding ShowMaterialesCommand}"/>
+                    <Button Text="Mantenimiento"  BackgroundColor="#D3D3D3"  Command="{Binding ShowMantenimientoCommand}"/>
+                    <Button Text="Tareas"  BackgroundColor="#D3D3D3"  Command="{Binding ShowTareasCommand}"/>
                 </StackLayout>
 
                 <!-- Botón de Gestión Documental con submenú -->
                 <Button Text="Docs" Command="{Binding ToggleDocumentsSubmenuCommand}" BackgroundColor="#1E90FF" />
                 <StackLayout IsVisible="{Binding IsDocumentsSubmenuVisible}" Padding="10, 0, 0, 0" Spacing="5">
-                    <Button Text="Ver Documentos"  BackgroundColor="#D3D3D3" />
+                    <Button Text="Ver Documentos"  BackgroundColor="#D3D3D3" Command="{Binding ShowDocumentosCommand}"/>
                 </StackLayout>
 
                 <!-- Botón de Configuración con submenú -->
                 <Button Text="Config." Command="{Binding ToggleSettingsSubmenuCommand}" BackgroundColor="#1E90FF" />
                 <StackLayout IsVisible="{Binding IsSettingsSubmenuVisible}" Padding="10, 0, 0, 0" Spacing="5">
-                    <Button Text="Ajustes"  BackgroundColor="#D3D3D3" />
-                    <Button Text="Ayuda"  BackgroundColor="#D3D3D3" />
+                    <Button Text="Ajustes"  BackgroundColor="#D3D3D3" Command="{Binding ShowAjustesCommand}"/>
+                    <Button Text="Ayuda"  BackgroundColor="#D3D3D3" Command="{Binding ShowAyudaCommand}"/>
                     <Button Text="Cerrar Sesión"  BackgroundColor="Red" TextColor="White" Command="{Binding LogoutCommand}" />
                 </StackLayout>
             </StackLayout>
